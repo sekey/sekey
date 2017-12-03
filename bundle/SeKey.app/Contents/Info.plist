@@ -17,13 +17,11 @@
 	<key>CFBundleLongVersionString</key>
 	<string></string>
 	<key>CFBundleName</key>
-	<string>5E8NNEEMLP.com.ntrippar.sekey</string>
+	<string>com.ntrippar.sekey</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
-	<key>CFBundleSignature</key>
-	<string>5E8NNEEMLP.com.ntrippar.sekey</string>
 	<key>CFBundleVersion</key>
 	<string></string>
 	<key>CSResourcesFileMapped</key>
