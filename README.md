@@ -1,7 +1,7 @@
 # SeKey
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ntrippar/sekey/master/assets/screenshot.png" alt="SeKey" />
+  <img src="https://raw.githubusercontent.com/ntrippar/sekey/master/assets/screenshot.png" alt="SeKey" width="80%" height="80%" />
 </p>
 
 ## About
