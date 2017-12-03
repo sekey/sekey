@@ -50,7 +50,6 @@ Unfortunately, I can't make a Homebrew formula because KeyChain API requieres en
 </dict>
 </plist>
 ```
-
 4. Fix permissions
 ```sh
 chown youruser:wheel /absolute/path/to/SeKey.app/Contents/MacOS/sekey
@@ -59,12 +58,11 @@ chown youruser:wheel /absolute/path/to/SeKey.app/Contents/MacOS/sekey
 ```sh
 launchctl load -F ~/Library/LaunchAgents/com.ntrippar.sekey.plist
 ```
-
 6. Set enviroment variables and fix the path of sekey folder.
 ```
 export PATH=$PATH:/path/to/SeKey.app/Contents/MacOS
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
-``
+```
 
 ## Usage
 
