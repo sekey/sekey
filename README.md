@@ -23,7 +23,7 @@ Unfortunately, I can't make a Homebrew formula because KeyChain API requieres en
 
 1. Go to ~/Library/LaunchAgents
 2. Create the file com.ntrippar.sekey.plist
-3. Paste the following into the file and fix the path of the sekey-agent binary:
+3. Paste the following into the file and fix the path of the sekey binary:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
