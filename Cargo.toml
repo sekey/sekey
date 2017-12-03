@@ -1,0 +1,20 @@
+[package]
+name = "sekey"
+version = "0.1.0"
+authors = ["Nicolas Trippar <ntrippar@gmail.com>"]
+build = "build.rs"
+
+[dependencies]
+env_logger = "0.4.3"
+clap = "2.28.0"
+objc-foundation = "0.1.1"
+byteorder = "1.1.0"
+base64 = "0.8.0"
+eagre-asn1 = "0.2.0"
+core-foundation = "0.4.6"
+libc = "0.2"
+prettytable-rs = "0.6.7"
+hex = "0.3.1"
+rust-crypto = "0.2.36"
+ssh_agent =  { path = "../ssh_agent" }
+
