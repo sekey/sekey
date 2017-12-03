@@ -23,10 +23,11 @@ The Secure Enclave is a hardware-based key manager that’s isolated from the ma
 Unfortunately, I can't make a Homebrew formula because KeyChain API requieres entitlements, so the binary has to be signed to work.
 
 **Manual Installation**
-
-1. Go to ~/Library/LaunchAgents
-2. Create the file com.ntrippar.sekey.plist
-3. Paste the following into the file and fix the path of the sekey binary:
+1. Go to [Releases](https://github.com/ntrippar/ssh-agent/releases/) and download the latest release
+2. Place the App in the Applications folder.
+3. Go to ~/Library/LaunchAgents
+4. Create the file com.ntrippar.sekey.plist
+5. Paste the following into the file and fix the path of the sekey binary:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
