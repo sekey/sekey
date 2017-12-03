@@ -1,5 +1,8 @@
 # SeKey
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ntrippar/sekey/master/assets/screenshot.png" alt="SeKey" />
+</p>
 
 ## About
 SeKey is a SSH Agent that allow users to authenticate to UNIX/Linux SSH servers using the Secure Enclave
@@ -32,7 +35,7 @@ Unfortunately, I can't make a Homebrew formula because KeyChain API requieres en
     <key>Label</key>
     <string>com.ntrippar.sekey</string>
     <key>Program</key>
-        <string>/absolute/path/to/sekey</string>
+        <string>/absolute/path/to/SeKey.app/Contents/MacOS/sekey</string>
     <key>ProgramArguments</key>
     <array>
         <string>--daemon</string>
@@ -49,13 +52,18 @@ Unfortunately, I can't make a Homebrew formula because KeyChain API requieres en
 
 4. Fix permissions
 ```sh
-chown youruser:wheel /absolute/path/to/sekey-agent
+chown youruser:wheel /absolute/path/to/SeKey.app/Contents/MacOS/sekey
 ```
 5. Load the agent to the user account:
 ```sh
 launchctl load -F ~/Library/LaunchAgents/com.ntrippar.sekey.plist
 ```
 
+6. Set enviroment variables and fix the path of sekey folder.
+```
+export PATH=$PATH:/path/to/SeKey.app/Contents/MacOS
+export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+``
 
 ## Usage
 
