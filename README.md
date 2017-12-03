@@ -13,8 +13,147 @@ The Secure Enclave is a hardware-based key manager that’s isolated from the ma
 * Can’t import preexisting key
 * Stores only 256-bit elliptic curve private key
 
-
 ## Install
+
+**Homebrew**
+
+Unfortunately, I can't make a Homebrew formula because KeyChain API requieres entitlements, so the binary has to be signed to work.
+
+**Manual Installation**
+
+1. Go to ~/Library/LaunchAgents
+2. Create the file com.ntrippar.sekey.plist
+3. Paste the following into the file and fix the path of the sekey-agent binary:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ntrippar.sekey</string>
+    <key>Program</key>
+        <string>/absolute/path/to/sekey</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>--daemon</string>
+    </array>
+    <key>StandardErrorPath</key>
+        <string>/dev/null</string>
+    <key>StandardOutPath</key>
+    <string>/dev/null</string>
+        <key>KeepAlive</key>
+    <true/>
+</dict>
+</plist>
+```
+
+4. Fix permissions
+```sh
+chown youruser:wheel /absolute/path/to/sekey-agent
+```
+5. Load the agent to the user account:
+```sh
+launchctl load -F ~/Library/LaunchAgents/com.ntrippar.sekey.plist
+```
+
+
+## Usage
+
+For the help menu:
+
+```sh
+ntrippar@macbookpro:~% sekey -h
+SeKey 1.0
+Nicolas Trippar <ntrippar@gmail.com>
+Use Secure Enclave for SSH Authentication
+
+USAGE:
+    sekey [FLAGS] [OPTIONS]
+
+FLAGS:
+        --daemon       Run the daemon
+    -h, --help         Prints help information
+        --list-keys    List all keys
+    -V, --version      Prints version information
+
+OPTIONS:
+        --delete-keypair <ID>         Deltes the keypair
+        --export-key <ID>             export key to OpenSSH Format
+        --generate-keypair <LABEL>    Generate a key inside the Secure Enclave
+```
+
+
+**Examples**
+
+Create KeyPair inside the Secure Enclave:
+
+```sh
+ntrippar@macbookpro:~% sekey sekey --generate-keypair "Github Key"
+Keypair Github Key sucessfully generated
+
+```
+
+List keys in the secure enclave:
+
+```sh
+ntrippar@macbookpro:~% sekey --list-keys
+
+┌────────────────────┬──────────────────────────────────────────────────┐
+│       Label        │                        ID                        │
+├────────────────────┼──────────────────────────────────────────────────┤
+│     Github Key     │     d179eb4c2d6a242de64e82240b8b6e611cf0d729     │
+└────────────────────┴──────────────────────────────────────────────────┘
+```
+
+Export public key to OpenSSH format:
+
+```sh
+ntrippar@macbookpro:~% sekey --export-key d179eb4c2d6a242de64e82240b8b6e611cf0d729
+ecdsa-sha2-nistp25 AAAAEmVjZHNhLXNoYTItbmlzdHAyNQAAAAhuaXN0cDI1NgAAAEEE8HM7SBdu3yOYkmF0Wnj/q8t2NJC6JYJWZ4IyvkOVIeUs6mi4B424bAjhZ4Awgk5ax9r25RB3Q8tL2/7J/3xchQ==
+```
+
+Delete Keypair:
+
+```sh
+ntrippar@macbookpro:~% sekey --delete-keypair d179eb4c2d6a242de64e82240b8b6e611cf0d729
+Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
+```
+
+## How to Build
+
+**Build**
+
+Sekey is built with [Cargo](https://crates.io/), the Rust package manager. We also use XCode to build the Obetive-C code to bridge with the Secure Enclave and sign the binary.
+
+```sh
+git clone https://github.com/ntrippar/sekey
+cd sekey
+cargo build --release
+```
+
+**Package**
+
+```sh
+cp ./target/release/sekey ./bundle/SeKey.app/Contents/MacOS/sekey
+```
+
+**Sign**
+
+SeKey utilizes the KeyChain API on MacOS, for using it the app needs to be signed and have the correct entitlements.
+
+You need to change the sign parameter to match your own signing key
+
+Listing keys
+
+```sh
+security find-identity -v -p codesigning
+```
+
+Sign
+
+```sh
+codesign --force --identifier "com.ntrippar.sekey" --sign "Developer ID Application: Nicolas Trippar (5E8NNEEMLP)" --entitlements ./assets/sekey.entitlements --timestamp=none ./bundle/SeKey.app
+```
 
 ## Contribute
 Members of the open-source community are encouraged to submit pull requests directly through GitHub.
