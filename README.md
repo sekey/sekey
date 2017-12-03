@@ -35,24 +35,24 @@ Unfortunately, I can't make a Homebrew formula because KeyChain API requieres en
 <dict>
     <key>Label</key>
     <string>com.ntrippar.sekey</string>
-    <key>Program</key>
-        <string>/absolute/path/to/SeKey.app/Contents/MacOS/sekey</string>
     <key>ProgramArguments</key>
     <array>
+        <string>/absolute/path/to/SeKey.app/Contents/MacOS/sekey</string>
         <string>--daemon</string>
     </array>
     <key>StandardErrorPath</key>
-        <string>/dev/null</string>
+    <string>/dev/null</string>
     <key>StandardOutPath</key>
     <string>/dev/null</string>
-        <key>KeepAlive</key>
+    <key>KeepAlive</key>
     <true/>
 </dict>
 </plist>
+
 ```
 4. Fix permissions
 ```sh
-chown youruser:wheel /absolute/path/to/SeKey.app/Contents/MacOS/sekey
+chown youruser:staff /absolute/path/to/SeKey.app/Contents/MacOS/sekey
 ```
 5. Load the agent to the user account:
 ```sh
