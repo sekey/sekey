@@ -39,7 +39,6 @@ impl SSHAgentHandler for Handler {
 		// parse the pubkey that server send to us, then hash it and we will use that
 		// hash to get the key from the enclave to sign
 		let pubkey = EcdsaSha2Nistp256::read(pubkey);
-		println!("{:?}", pubkey);
 		let mut hasher = Sha1::new();
 
 		let mut hash: [u8; 20] = [0; 20];
