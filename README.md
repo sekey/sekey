@@ -1,5 +1,7 @@
 # SeKey
 
+[![Build Status](https://travis-ci.org/ntrippar/sekey.svg?branch=master)](https://travis-ci.org/ntrippar/sekey)
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/ntrippar/sekey/master/assets/screenshot.png" alt="SeKey" width="80%" height="80%" />
 </p>
