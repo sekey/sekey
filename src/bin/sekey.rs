@@ -128,7 +128,7 @@ fn main() {
         if let Ok(key_id_) = hex::decode(key_id) {
             let key = Keychain::delete_keypair(key_id_);
             match key {
-                Ok(_) => println!("Key {} sucessfully deleted", key_id),
+                Ok(_) => println!("Key {} successfully deleted", key_id),
                 Err(_) => eprintln!("Error deleting key"),
             }
 
@@ -141,7 +141,7 @@ fn main() {
         let key = Keychain::generate_keypair(label.to_string());
         match key {
             Ok(_) => {
-                println!("Keypair {} sucessfully generated", label)
+                println!("Keypair {} successfully generated", label)
             },
             Err(_) => eprintln!("Error generating key"),
         }
