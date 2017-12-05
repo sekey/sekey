@@ -22,7 +22,7 @@ The Secure Enclave is a hardware-based key manager that’s isolated from the ma
 
 **Homebrew**
 
-Unfortunately, I can't make a Homebrew formula because KeyChain API requieres entitlements, so the binary has to be signed to work.
+Unfortunately, I can't make a Homebrew formula because KeyChain API requires entitlements, so the binary has to be signed to work.
 
 **Manual Installation**
 1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the latest release
@@ -132,7 +132,7 @@ Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
 
 **Build**
 
-Sekey is built with [Cargo](https://crates.io/), the Rust package manager. We also use XCode to build the Obetive-C code to bridge with the Secure Enclave and sign the binary.
+Sekey is built with [Cargo](https://crates.io/), the Rust package manager. We also use Xcode to build the Objective-C code to bridge with the Secure Enclave and sign the binary.
 
 ```sh
 git clone https://github.com/ntrippar/sekey
