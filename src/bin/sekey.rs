@@ -78,7 +78,7 @@ fn main() {
                                 .long("delete-keypair")
                                 .short("d")
                                 .value_name("ID")
-                                .help("Deltes the keypair")
+                                .help("Deletes the keypair")
                                 .takes_value(true)
                                 .conflicts_with_all(&["list-keys"]))
                       .get_matches();
