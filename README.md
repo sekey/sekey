@@ -97,7 +97,7 @@ OPTIONS:
 Create KeyPair inside the Secure Enclave:
 
 ```sh
-ntrippar@macbookpro:~% sekey sekey --generate-keypair "Github Key"
+ntrippar@macbookpro:~% sekey --generate-keypair "Github Key"
 Keypair Github Key sucessfully generated
 
 ```
