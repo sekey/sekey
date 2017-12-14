@@ -24,8 +24,17 @@ The Secure Enclave is a hardware-based key manager that’s isolated from the ma
 
 Unfortunately, I can't make a Homebrew formula because KeyChain API requires entitlements, so the binary has to be signed to work.
 
+**Pkg Installer**
+1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the pkg release
+2. Install the application using the pkg.
+3. Set enviroment variables and fix the path of sekey folder.
+```
+export PATH=$PATH:/Applications/SeKey.app/Contents/MacOS
+export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+```
+
 **Manual Installation**
-1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the latest release
+1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the zip release
 2. Place the App in the Applications folder.
 3. Go to ~/Library/LaunchAgents
 4. Create the file com.ntrippar.sekey.plist
@@ -140,11 +149,6 @@ cd sekey
 cargo build --release
 ```
 
-**Package**
-
-```sh
-cp ./target/release/sekey ./bundle/SeKey.app/Contents/MacOS/sekey
-```
 
 **Sign**
 
@@ -162,6 +166,19 @@ Sign
 
 ```sh
 codesign --force --identifier "com.ntrippar.sekey" --sign "Developer ID Application: Nicolas Trippar (5E8NNEEMLP)" --entitlements ./assets/sekey.entitlements --timestamp=none ./bundle/SeKey.app
+```
+
+**Package**
+
+```sh
+cp ./target/release/sekey ./bundle/Applications/SeKey.app/Contents/MacOS/sekey
+```
+
+if needed to create a pkg installer
+```sh
+pkgbuild --analyze --root ./bundle/ SeKey.plist
+
+pkgbuild --sign "Developer ID Installer: Nicolas Trippar (5E8NNEEMLP)" --identifier com.ntrippar.sekey --root ./bundle/ --scripts ./install-scripts --component-plist ./Sekey.plist ./sekey.pkg
 ```
 
 ## Contribute
