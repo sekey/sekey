@@ -105,11 +105,15 @@ fn main() {
         table.set_titles(row![bc => "Label", "ID"]);
 
         let keys = Keychain::get_public_keys();
-        for key in keys{
-            //key.hash
-            table.add_row(row![key.label, hex::encode(key.hash)]);
+        if keys.len() >= 1 {
+            for key in keys{
+                //key.hash
+                table.add_row(row![key.label, hex::encode(key.hash)]);
+            }
+            table.printstd();
+        } else {
+            println!("No keys stored");
         }
-        table.printstd();
     }
 
     // match export-key
