@@ -22,7 +22,17 @@ The Secure Enclave is a hardware-based key manager that’s isolated from the ma
 
 **Homebrew**
 
-Unfortunately, I can't make a Homebrew formula because KeyChain API requires entitlements, so the binary has to be signed to work.
+Unfortunately, I can't make a Homebrew formula because KeyChain API requires entitlements, so the binary has to be signed to work, still you can use [Homebrew Cask](https://caskroom.github.io/)
+
+**Homebrew Cask**
+1. Install Sekey
+```sh
+brew cask install sekey
+```
+2. Append the following line to your `~/.bash_profile` or `~/.zshrc`
+```sh
+export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+```
 
 **Pkg Installer**
 1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the pkg release
