@@ -151,7 +151,7 @@ Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
 
 **Build**
 
-Sekey is built with [Cargo](https://crates.io/), the Rust package manager. We also use Xcode to build the Objective-C code to bridge with the Secure Enclave and sign the binary.
+Sekey is built with [Cargo](https://crates.io/), the Rust package manager.
 
 ```sh
 git clone https://github.com/ntrippar/sekey
