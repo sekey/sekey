@@ -33,6 +33,10 @@ brew cask install sekey
 ```sh
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
 ```
+Fish users can add the following line to their `Config.fish`
+```
+set -x SSH_AUTH_SOCK $HOME/.sekey/ssh-agent.ssh
+```
 
 **Pkg Installer**
 1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the pkg release
