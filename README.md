@@ -33,6 +33,13 @@ brew cask install sekey
 ```sh
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
 ```
+_or_
+
+2. Add the following line you your `~/.ssh/config` or `/etc/ssh/ssh_config`
+```
+IdentityAgent ~/.sekey/ssh-agent.ssh
+```
+
 
 **Pkg Installer**
 1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the pkg release
