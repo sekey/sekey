@@ -154,6 +154,20 @@ ntrippar@macbookpro:~% sekey --delete-keypair d179eb4c2d6a242de64e82240b8b6e611c
 Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
 ```
 
+Use key for a specific host:
+
+1. export the public key from sekey and save it to a file
+```sh
+ntrippar@macbookpro:~% sekey --export-key d179eb4c2d6a242de64e82240b8b6e611cf0d729 > ~/.ssh/example.com.pub
+```
+2. on the ssh config file located in `~/.ssh/config` we should add a entry so the ssh only query that key for the given host
+
+```
+Host example.com
+    IdentityFile ~/.ssh/example.com.pub
+    IdentitiesOnly yes
+```
+
 ## How to Build
 
 **Build**
