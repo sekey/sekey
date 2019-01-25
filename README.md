@@ -1,6 +1,7 @@
 # SeKey
 
-[![Build Status](https://travis-ci.org/ntrippar/sekey.svg?branch=master)](https://travis-ci.org/ntrippar/sekey)
+[![Build Status][build-image]][build-link]
+[![MIT Licensed][license-image]][license-link]
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/ntrippar/sekey/master/assets/screenshot.png" alt="SeKey" width="80%" height="80%" />
@@ -214,4 +215,9 @@ pkgbuild --sign "Developer ID Installer: Nicolas Trippar (5E8NNEEMLP)" --identif
 
 ## Contribute
 Members of the open-source community are encouraged to submit pull requests directly through GitHub.
+
+[build-image]: https://travis-ci.org/sekey/sekey.svg?branch=master
+[build-link]: https://travis-ci.org/sekey/sekey
+[license-image]: https://img.shields.io/github/license/sekey/sekey.svg
+[license-link]: https://github.com/sekey/sekey/blob/master/LICENSE
 
