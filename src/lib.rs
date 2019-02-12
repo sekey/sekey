@@ -1,3 +1,7 @@
+#[macro_use]
+extern crate log;
+extern crate env_logger;
+
 extern crate byteorder;
 extern crate core_foundation;
 extern crate libc;

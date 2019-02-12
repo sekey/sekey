@@ -1,5 +1,5 @@
-use std::io::{Cursor, Write, Read, BufRead};
-use byteorder::{BigEndian, WriteBytesExt, ReadBytesExt};
+use std::io::{Write};
+use byteorder::{BigEndian, WriteBytesExt};
 use eagre_asn1::der::DER;
 
 #[derive(Debug)]
@@ -35,20 +35,6 @@ impl EcdsaSha2Nistp256 {
 		data.write_u32::<BigEndian>(key.len() as u32).unwrap();
 		data.write_all(key.as_slice());
 		data 
-	}
-
-	//read from SSH-key Format
-	pub fn read(data: Vec<u8>) -> Vec<u8> {
-		let mut cursor = Cursor::new(data);
-		let len = cursor.read_u32::<BigEndian>().unwrap();
-		//cursor.read(len);
-		cursor.consume(len as usize);
-		let len = cursor.read_u32::<BigEndian>().unwrap();
-		cursor.consume(len as usize);
-		let len = cursor.read_u32::<BigEndian>().unwrap();
-		let mut buffer = vec![0; len as usize];
-		cursor.read(&mut buffer);
-		buffer
 	}
 
 	pub fn parse_asn1(signed_data: Vec<u8>) -> ECDSASign{

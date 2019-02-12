@@ -7,8 +7,6 @@ extern crate prettytable;
 extern crate hex;
 extern crate base64;
 
-
-use std::os::unix::net::{UnixListener};
 use clap::{App, Arg};
 
 use prettytable::Table;
@@ -16,11 +14,11 @@ use prettytable::format;
 
 use sekey::Keychain;
 use sekey::ecdsa::{EcdsaSha2Nistp256, CURVE_TYPE};
-use sekey::handler::Handler;
-use ssh_agent::SSHAgentHandler;
+use sekey::handler::run_agent;
 use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
+
 use std::env;
 
 
@@ -42,9 +40,9 @@ fn create_home_path(home: PathBuf) -> Result<(), &'static str> {
 }
 
 fn main() {
-    env_logger::init().unwrap_or_else(|err| {
-        eprintln!("logger init error {}", err);
-    });
+    // env_logger::init().unwrap_or_else(|err| {
+    //     eprintln!("logger init error {}", err);
+    // });
 
     let matches = App::new("SeKey")
                       .version("1.0")
@@ -165,18 +163,9 @@ fn main() {
                 match create_home_path(path.clone()){
                     Ok(_) => {
                         let pipe = format!("{}{}{}", path.display(), SEKEY_HOME_FOLDER, SSH_AGENT_PIPE);
-                        let pipe = Path::new(pipe.as_str());
-                        if fs::metadata(&pipe).is_ok() {
-                            if let Ok(_) = fs::remove_file(&pipe){
-                                println!("Pipe deleted");
-
-                            }
-
-                        }
-                        println!("binding to {}", pipe.display());
-                        let listener = UnixListener::bind(pipe);
-                        let handler = Handler::new();
-                        ssh_agent::Agent::run(handler, listener.unwrap());
+                        fs::remove_file(pipe.clone());
+                        run_agent(pipe.as_str());
+               
                     }
                     Err(_) => eprintln!("Error creating home path"),
                 }

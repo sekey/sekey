@@ -6,7 +6,7 @@ build = "build.rs"
 edition = "2018"
 
 [dependencies]
-env_logger = "0.4.3"
+log = "0.4.6"
 clap = "2.28.0"
 byteorder = "1.1.0"
 base64 = "0.8.0"
@@ -16,6 +16,5 @@ libc = "0.2"
 prettytable-rs = "0.6.7"
 hex = "0.3.1"
 rust-crypto = "0.2.36"
-ssh_agent = { git = 'https://github.com/ntrippar/ssh-agent' }
-
-
+ssh-agent = "0.2.0"
+env_logger = "0.6.0"
