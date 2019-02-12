@@ -10,5 +10,5 @@ extern crate crypto;
 mod keychain;
 pub mod ecdsa;
 
-pub use keychain::Keychain;
+pub use crate::keychain::Keychain;
 pub mod handler;

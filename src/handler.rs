@@ -8,8 +8,8 @@ use byteorder::{BigEndian, WriteBytesExt};
 use crypto::digest::Digest;
 use crypto::sha1::Sha1;
 
-use Keychain;
-use ecdsa::{EcdsaSha2Nistp256, CURVE_TYPE};
+use crate::Keychain;
+use crate::ecdsa::{EcdsaSha2Nistp256, CURVE_TYPE};
 
 use ssh_agent::error::HandleResult;
 
