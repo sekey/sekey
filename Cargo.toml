@@ -3,6 +3,7 @@ name = "sekey"
 version = "0.1.0"
 authors = ["Nicolas Trippar <ntrippar@gmail.com>"]
 build = "build.rs"
+edition = "2018"
 
 [dependencies]
 env_logger = "0.4.3"
