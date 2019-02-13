@@ -16,5 +16,6 @@ libc = "0.2"
 prettytable-rs = "0.6.7"
 hex = "0.3.1"
 rust-crypto = "0.2.36"
-ssh-agent = "0.2.0"
 env_logger = "0.6.0"
+ssh-agent = { git = "https://github.com/sekey/ssh-agent.rs", branch = "dev" }
+
