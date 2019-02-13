@@ -6,6 +6,7 @@ extern crate clap;
 extern crate prettytable;
 extern crate hex;
 extern crate base64;
+extern crate dirs;
 
 use clap::{App, Arg};
 
@@ -155,10 +156,10 @@ fn main() {
     }
 
 
-    //generate_keypair
+    // generate_keypair
     // run the daemon!
     if matches.is_present("daemon") {
-        match env::home_dir() {
+        match dirs::home_dir() {
             Some(path) => {
                 match create_home_path(path.clone()){
                     Ok(_) => {
