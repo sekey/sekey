@@ -1,6 +1,3 @@
-use std::io::{Write};
-use byteorder::{BigEndian, WriteBytesExt};
-
 use crypto::digest::Digest;
 use crypto::sha1::Sha1;
 
@@ -11,7 +8,7 @@ use std::error::Error;
 
 use ssh_agent::proto::{from_bytes, to_bytes};
 use ssh_agent::proto::message::{self, Message, SignRequest};
-use ssh_agent::proto::signature::{self, Signature};
+use ssh_agent::proto::signature::{Signature, EcDsaSignature, EcDsaSignatureData};
 use ssh_agent::proto::public_key::{PublicKey, EcDsaPublicKey};
 use ssh_agent::agent::Agent;
 
@@ -68,21 +65,16 @@ impl SeKeyAgent {
 				let signed = Keychain::sign_data(sign_request.data.to_vec(), hash.to_vec())?;
 				let ecdsasign = EcdsaSha2Nistp256::parse_asn1(signed);
 
-				//sign that we would return
-				let mut signature:Vec<u8> = Vec::new();
 
-				//write signR
-				signature.write_u32::<BigEndian>(ecdsasign.r.len() as u32).unwrap();
-				signature.write_all(ecdsasign.r.as_slice())?;
-				
-				//write signS
-				signature.write_u32::<BigEndian>(ecdsasign.s.len() as u32).unwrap();
-				signature.write_all(ecdsasign.s.as_slice())?;
+				let signature = EcDsaSignature {
+			        identifier: "nistp256".to_string(),
+			        data: EcDsaSignatureData {
+						r: ecdsasign.r,
+						s: ecdsasign.s,
+					}
+			    };
 
-				Ok(Signature {
-			        algorithm: "ecdsa-sha2-nistp256".to_string(),
-			        blob: signature
-			    })
+				Ok(Signature::from(signature))
 			}
 			_ => Err(From::from("Signature for key type not implemented"))
 		}
