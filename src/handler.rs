@@ -1,5 +1,4 @@
-use crypto::digest::Digest;
-use crypto::sha1::Sha1;
+use sha1::Sha1;
 
 use crate::Keychain;
 use crate::ecdsa::{EcdsaSha2Nistp256};
@@ -19,21 +18,19 @@ struct Identity {
     comment: String
 }
 
-#[derive(Clone, PartialEq, Debug)]
-pub struct SeKeyAgent {}
+#[derive(Clone, PartialEq, Debug, Default)]
+pub struct SeKey {}
 
-impl SeKeyAgent {
+impl SeKey {
+
     pub fn new() -> Self {
-        Self { 
-
-		}
+        Default::default()
     }
-
      
 	fn identities(&self) -> Vec<Identity>{
 		let mut identities = vec![];
 		let keys = Keychain::get_public_keys();
-		
+	
 		for key in keys {
 			let pubkey = EcDsaPublicKey {
 				identifier: "nistp256".to_string(), 
@@ -55,14 +52,11 @@ impl SeKeyAgent {
 		match pubkey {
 			PublicKey::EcDsa(ref key) => {
 
-				let mut hasher = Sha1::new();
-
-				let mut hash: [u8; 20] = [0; 20];
-				hasher.input(&key.q);
-				hasher.result(&mut hash);
+				let hash = Sha1::from(&key.q);
+				let digest = hash.digest().bytes().to_vec();
 				
-				//here we sign the request and do all the enclave communication
-				let signed = Keychain::sign_data(sign_request.data.to_vec(), hash.to_vec())?;
+				// here we sign the request and do all the enclave communication
+				let signed = Keychain::sign_data(sign_request.data.to_vec(), digest)?;
 				let ecdsasign = EcdsaSha2Nistp256::parse_asn1(signed);
 
 
@@ -101,12 +95,13 @@ impl SeKeyAgent {
             _ => Err(From::from(format!("Unknown message: {:?}", request)))
         };
         info!("Response {:?}", response);
-        return response;
+        response
     }
+
 }
 
 
-impl Agent for SeKeyAgent {
+impl Agent for SeKey {
     type Error = ();
     
     fn handle(&self, message: Message) -> Result<Message, ()> {
@@ -118,6 +113,6 @@ impl Agent for SeKeyAgent {
 }
 
 pub fn run_agent(path: &str) {
-	let agent = SeKeyAgent::new();
+	let agent = SeKey::new();
 	let _ = agent.run_unix(path);
 }
