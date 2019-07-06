@@ -45,7 +45,7 @@ IdentityAgent ~/.sekey/ssh-agent.ssh
 **Pkg Installer**
 1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the pkg release
 2. Install the application using the pkg.
-3. Set enviroment variables and fix the path of sekey folder.
+3. Set environment variables and fix the path of sekey folder.
 ```
 export PATH=$PATH:/Applications/SeKey.app/Contents/MacOS
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
@@ -87,7 +87,7 @@ chown youruser:staff /absolute/path/to/SeKey.app/Contents/MacOS/sekey
 ```sh
 launchctl load -F ~/Library/LaunchAgents/com.ntrippar.sekey.plist
 ```
-6. Set enviroment variables and fix the path of sekey folder.
+6. Set environment variables and fix the path of sekey folder.
 ```
 export PATH=$PATH:/path/to/SeKey.app/Contents/MacOS
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
@@ -125,7 +125,7 @@ Create KeyPair inside the Secure Enclave:
 
 ```sh
 ntrippar@macbookpro:~% sekey --generate-keypair "Github Key"
-Keypair Github Key sucessfully generated
+Keypair Github Key successfully generated
 
 ```
 
@@ -152,7 +152,7 @@ Delete Keypair:
 
 ```sh
 ntrippar@macbookpro:~% sekey --delete-keypair d179eb4c2d6a242de64e82240b8b6e611cf0d729
-Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
+Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 successfully deleted
 ```
 
 Use key for a specific host:
