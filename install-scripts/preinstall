@@ -3,4 +3,4 @@
 LAUNCH_AGENT_PLIST="$HOME/Library/LaunchAgents/com.ntrippar.sekey.plist"
 # we just unload the sekey service, just in case if something is using it so we
 # can update it correctly.
-sudo -u "${USER}" launchctl unload $LAUNCH_AGENT_PLIST || true
+sudo -u "${USER}" launchctl unload "$LAUNCH_AGENT_PLIST" || true

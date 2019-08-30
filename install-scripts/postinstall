@@ -6,10 +6,10 @@ LAUNCH_AGENT_PLIST="$LAUNCH_AGENTS_DIR/com.ntrippar.sekey.plist"
 
 # This directory should already exist, but some users have had issues with it
 # being missing.
-mkdir -p $LAUNCH_AGENTS_DIR
+mkdir -p "$LAUNCH_AGENTS_DIR"
 
 # write the LaunchAgent Plist
-cat > $LAUNCH_AGENT_PLIST << EOT
+cat > "$LAUNCH_AGENT_PLIST" << EOT
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -32,9 +32,9 @@ cat > $LAUNCH_AGENT_PLIST << EOT
 EOT
 
 #fix permissions, also so it runs at the current user
-chown "${USER}:staff" $LAUNCH_AGENT_PLIST
+chown "${USER}:staff" "$LAUNCH_AGENT_PLIST"
 
 # Launch the app
-sudo -u "${USER}" launchctl load $LAUNCH_AGENT_PLIST
+sudo -u "${USER}" launchctl load "$LAUNCH_AGENT_PLIST"
 
 exit 0

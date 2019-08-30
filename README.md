@@ -32,7 +32,7 @@ brew cask install sekey
 ```
 2. Append the following line to your `~/.bash_profile` or `~/.zshrc`
 ```sh
-export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+export SSH_AUTH_SOCK="$HOME/.sekey/ssh-agent.ssh"
 ```
 _or_
 
@@ -48,7 +48,7 @@ IdentityAgent ~/.sekey/ssh-agent.ssh
 3. Set enviroment variables and fix the path of sekey folder.
 ```sh
 export PATH=$PATH:/Applications/SeKey.app/Contents/MacOS
-export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+export SSH_AUTH_SOCK="$HOME/.sekey/ssh-agent.ssh"
 ```
 
 **Manual Installation**
@@ -90,7 +90,7 @@ launchctl load -F ~/Library/LaunchAgents/com.ntrippar.sekey.plist
 6. Set environment variables and fix the path of sekey folder.
 ```sh
 export PATH=$PATH:/path/to/SeKey.app/Contents/MacOS
-export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
+export SSH_AUTH_SOCK="$HOME/.sekey/ssh-agent.ssh"
 ```
 
 ## Usage
