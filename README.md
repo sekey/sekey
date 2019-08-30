@@ -46,7 +46,7 @@ IdentityAgent ~/.sekey/ssh-agent.ssh
 1. Go to [Releases](https://github.com/ntrippar/sekey/releases/) and download the pkg release
 2. Install the application using the pkg.
 3. Set enviroment variables and fix the path of sekey folder.
-```
+```sh
 export PATH=$PATH:/Applications/SeKey.app/Contents/MacOS
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
 ```
@@ -87,8 +87,8 @@ chown youruser:staff /absolute/path/to/SeKey.app/Contents/MacOS/sekey
 ```sh
 launchctl load -F ~/Library/LaunchAgents/com.ntrippar.sekey.plist
 ```
-6. Set enviroment variables and fix the path of sekey folder.
-```
+6. Set environment variables and fix the path of sekey folder.
+```sh
 export PATH=$PATH:/path/to/SeKey.app/Contents/MacOS
 export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
 ```
@@ -97,7 +97,7 @@ export SSH_AUTH_SOCK=$HOME/.sekey/ssh-agent.ssh
 
 For the help menu:
 
-```sh
+```
 ntrippar@macbookpro:~% sekey -h
 SeKey 1.0
 Nicolas Trippar <ntrippar@gmail.com>
@@ -123,7 +123,7 @@ OPTIONS:
 
 Create KeyPair inside the Secure Enclave:
 
-```sh
+```
 ntrippar@macbookpro:~% sekey --generate-keypair "Github Key"
 Keypair Github Key sucessfully generated
 
@@ -131,7 +131,7 @@ Keypair Github Key sucessfully generated
 
 List keys in the secure enclave:
 
-```sh
+```
 ntrippar@macbookpro:~% sekey --list-keys
 
 ┌────────────────────┬──────────────────────────────────────────────────┐
@@ -143,14 +143,14 @@ ntrippar@macbookpro:~% sekey --list-keys
 
 Export public key to OpenSSH format:
 
-```sh
+```
 ntrippar@macbookpro:~% sekey --export-key d179eb4c2d6a242de64e82240b8b6e611cf0d729
 ecdsa-sha2-nistp25 AAAAEmVjZHNhLXNoYTItbmlzdHAyNQAAAAhuaXN0cDI1NgAAAEEE8HM7SBdu3yOYkmF0Wnj/q8t2NJC6JYJWZ4IyvkOVIeUs6mi4B424bAjhZ4Awgk5ax9r25RB3Q8tL2/7J/3xchQ==
 ```
 
 Delete Keypair:
 
-```sh
+```
 ntrippar@macbookpro:~% sekey --delete-keypair d179eb4c2d6a242de64e82240b8b6e611cf0d729
 Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
 ```
@@ -158,7 +158,7 @@ Key d179eb4c2d6a242de64e82240b8b6e611cf0d729 sucessfully deleted
 Use key for a specific host:
 
 1. export the public key from sekey and save it to a file
-```sh
+```
 ntrippar@macbookpro:~% sekey --export-key d179eb4c2d6a242de64e82240b8b6e611cf0d729 > ~/.ssh/example.com.pub
 ```
 2. on the ssh config file located in `~/.ssh/config` we should add a entry so the ssh only query that key for the given host
