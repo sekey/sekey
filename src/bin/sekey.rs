@@ -1,6 +1,7 @@
 extern crate sekey;
 extern crate env_logger;
 extern crate ssh_agent;
+extern crate dirs;
 extern crate clap;
 #[macro_use]
 extern crate prettytable;
@@ -10,6 +11,7 @@ extern crate base64;
 
 use std::os::unix::net::{UnixListener};
 use clap::{App, Arg};
+use dirs::home_dir;
 
 use prettytable::Table;
 use prettytable::format;
@@ -21,8 +23,6 @@ use ssh_agent::SSHAgentHandler;
 use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
-use std::env;
-
 
 
 static SEKEY_HOME_FOLDER: &'static str = "/.sekey/";
@@ -160,7 +160,7 @@ fn main() {
     //generate_keypair
     // run the daemon!
     if matches.is_present("daemon") {
-        match env::home_dir() {
+        match home_dir() {
             Some(path) => {
                 match create_home_path(path.clone()){
                     Ok(_) => {
