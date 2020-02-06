@@ -6,9 +6,8 @@ extern crate ssh_agent;
 extern crate eagre_asn1;
 extern crate crypto;
 
-
-mod keychain;
 pub mod ecdsa;
+mod keychain;
 
 pub use keychain::Keychain;
 pub mod handler;
