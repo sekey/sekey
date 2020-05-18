@@ -113,7 +113,7 @@ FLAGS:
     -V, --version      Prints version information
 
 OPTIONS:
-        --delete-keypair <ID>         Deltes the keypair
+        --delete-keypair <ID>         Deletes the keypair
         --export-key <ID>             export key to OpenSSH Format
         --generate-keypair <LABEL>    Generate a key inside the Secure Enclave
 ```
