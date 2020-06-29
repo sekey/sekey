@@ -15,7 +15,7 @@ The Secure Enclave is a hardware-based key manager that’s isolated from the ma
 
 
 ### Limitations
-* Only support MacBook Pro with the Touch Bar and Touch ID
+* Only supports MacBook models with Touch ID
 * Can’t import preexisting key
 * Stores only 256-bit elliptic curve private key
 
