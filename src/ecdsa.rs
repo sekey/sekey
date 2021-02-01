@@ -14,7 +14,7 @@ der_sequence!{
 		s: NOTAG TYPE Vec<u8>,
 }
 
-pub static CURVE_INDETIFIER: &'static str = "nistp256";
+pub static CURVE_IDENTIFIER: &'static str = "nistp256";
 pub static CURVE_TYPE: &'static str = "ecdsa-sha2-nistp256";
 
 pub struct EcdsaSha2Nistp256;
@@ -23,17 +23,17 @@ impl EcdsaSha2Nistp256 {
 	// write to SSH-Key Format
 	pub fn write(key: Vec<u8>) -> Vec<u8> {
 		let curvetype = String::from(CURVE_TYPE);
-		let identifier = String::from(CURVE_INDETIFIER);
+		let identifier = String::from(CURVE_IDENTIFIER);
 		let mut data = vec![];
 		//write curve type
 		data.write_u32::<BigEndian>(curvetype.len() as u32).unwrap();
-		data.write_all(curvetype.as_bytes());
+		data.write_all(curvetype.as_bytes()).expect("error writing data!");
 		//write identifier
 		data.write_u32::<BigEndian>(identifier.len() as u32).unwrap();
-		data.write_all(identifier.as_bytes());
+		data.write_all(identifier.as_bytes()).expect("error writing data!");
 		//write key
 		data.write_u32::<BigEndian>(key.len() as u32).unwrap();
-		data.write_all(key.as_slice());
+		data.write_all(key.as_slice()).expect("error writing data!") ;
 		data 
 	}
 
@@ -47,7 +47,7 @@ impl EcdsaSha2Nistp256 {
 		cursor.consume(len as usize);
 		let len = cursor.read_u32::<BigEndian>().unwrap();
 		let mut buffer = vec![0; len as usize];
-		cursor.read(&mut buffer);
+		cursor.read(&mut buffer).expect("error reading SSH Key") ;
 		buffer
 	}
 
