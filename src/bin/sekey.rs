@@ -2,6 +2,7 @@ extern crate sekey;
 extern crate env_logger;
 extern crate ssh_agent;
 extern crate clap;
+extern crate home;
 #[macro_use]
 extern crate prettytable;
 extern crate hex;
@@ -21,9 +22,6 @@ use ssh_agent::SSHAgentHandler;
 use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
-use std::env;
-
-
 
 static SEKEY_HOME_FOLDER: &'static str = "/.sekey/";
 static SSH_AGENT_PIPE: &'static str = "ssh-agent.ssh";
@@ -47,42 +45,42 @@ fn main() {
     });
 
     let matches = App::new("SeKey")
-                      .version("1.0")
-                      .author("Nicolas Trippar <ntrippar@gmail.com>")
-                      .about("Use Secure Enclave for SSH Authentication")
-                      .arg(Arg::with_name("generate-keypair")
-                                .long("generate-keypair")
-                                .short("c")
-                                .value_name("LABEL")
-                                .help("Generate a key inside the Secure Enclave")
-                                .takes_value(true))
-                      .arg(Arg::with_name("list-keys")
-                                .long("list-keys")
-                                .short("l")
-                                .help("List all keys")
-                                .takes_value(false)
-                                .conflicts_with_all(&["generate-keypair"]))
-                          .arg(Arg::with_name("daemon")
-                                .long("daemon")
-                                .help("Run the daemon")
-                                .takes_value(false)
-                                .conflicts_with_all(&["list-keys"]))
-                      .arg(Arg::with_name("export-key")
-                                .long("export-key")
-                                .short("e")
-                                .value_name("ID")
-                                .help("export key to OpenSSH Format")
-                                .takes_value(true)
-                                .conflicts_with_all(&["list-keys"]))
-                      .arg(Arg::with_name("delete-keypair")
-                                .long("delete-keypair")
-                                .short("d")
-                                .value_name("ID")
-                                .help("Deletes the keypair")
-                                .takes_value(true)
-                                .conflicts_with_all(&["list-keys"]))
-                      .get_matches();
-
+        .version("1.0")
+	.author("Nicolas Trippar <ntrippar@gmail.com>")
+        .about("Use Secure Enclave for keys")
+        .arg(Arg::with_name("generate-keypair")
+             .long("generate-keypair")
+             .short("c")
+             .value_name("LABEL")
+             .help("Generate a key inside the Secure Enclave")
+             .takes_value(true))
+        .arg(Arg::with_name("list-keys")
+             .long("list-keys")
+             .short("l")
+             .help("List all keys")
+             .takes_value(false)
+             .conflicts_with_all(&["generate-keypair"]))
+        .arg(Arg::with_name("daemon")
+             .long("daemon")
+             .help("Run the daemon")
+             .takes_value(false)
+             .conflicts_with_all(&["list-keys"]))
+        .arg(Arg::with_name("export-key")
+             .long("export-key")
+             .short("e")
+             .value_name("ID")
+             .help("export key to OpenSSH Format")
+             .takes_value(true)
+             .conflicts_with_all(&["list-keys"]))
+        .arg(Arg::with_name("delete-keypair")
+             .long("delete-keypair")
+             .short("d")
+             .value_name("ID")
+             .help("Deletes the keypair")
+             .takes_value(true)
+             .conflicts_with_all(&["list-keys"]))
+        .get_matches();
+    
     // printing format
     let format = format::FormatBuilder::new()
         .column_separator('│')
@@ -160,7 +158,7 @@ fn main() {
     //generate_keypair
     // run the daemon!
     if matches.is_present("daemon") {
-        match env::home_dir() {
+        match home::home_dir() {
             Some(path) => {
                 match create_home_path(path.clone()){
                     Ok(_) => {
