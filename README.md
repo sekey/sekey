@@ -28,7 +28,7 @@ Unfortunately, I can't make a Homebrew formula because KeyChain API requires ent
 **Homebrew Cask**
 1. Install Sekey
 ```sh
-brew cask install sekey
+brew install --cask sekey
 ```
 2. Append the following line to your `~/.bash_profile` or `~/.zshrc`
 ```sh
